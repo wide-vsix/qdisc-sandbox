@@ -27,13 +27,13 @@ make deploy
 
 
 3. evaluation
-- start two iperf server processes at WAN
+- Start two iperf server processes at WAN.
 ```bash
 sudo ./exec.sh wan iperf3 -s &
 # change port
 sudo ./exec.sh wan iperf3 -s -p 5301 &
 ```
-- run iperf test
+- Run iperf from host A and after a while run iperf from host B.
 
 ```bash
 ./exec.sh hostA iperf3 -c 172.16.0.2 -t 9999
@@ -43,6 +43,12 @@ sudo ./exec.sh wan iperf3 -s -p 5301 &
 ./exec.sh hostB iperf3 -c 172.16.0.2 -p 5301 -t 9999
 ```
 
+## evaluation memo
+### fair queue (sfq) 
+host A: about 50 Mbps
+host B: about 50 Mbps
 
-
+### unfair queue (default, pfifo)
+host A: about 60 Mbps
+host B: about 40 Mbps
 
